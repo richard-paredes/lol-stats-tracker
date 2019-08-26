@@ -1,31 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import './assets/css/App.css';
 
 // Local components
-import SampleUsers from './components/sampleUsers/sampleUsers';
+import Header from './components/Header/index';
+import Search from './components/Search/index';
+import Profile from './components/Profile/index';
+import NotFound from './components/NotFound/index';
+
+// notification flash messages
+toast.configure({ autoClose: 3000, draggable: true });
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+    <BrowserRouter>
+      <div className="App-header container">
 
-        <SampleUsers />
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Search} />
+          <Route path="/profile" component={Profile} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
 
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    </BrowserRouter>
+
   );
 }
 

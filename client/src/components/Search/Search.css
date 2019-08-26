@@ -1,0 +1,58 @@
+.form-group {
+  margin: 1rem 0;
+}
+
+.search {
+  background: rgba(0, 0, 0, 0.5);
+  border: 4px #fff solid;
+  margin-top: 1rem;
+  padding: 2rem;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin-top: 1rem;
+}
+
+.btn-container {
+  text-align: center;
+}
+
+.btn-container button {
+  outline: 0;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  width: 140px;
+  height: auto;
+  line-height: 35px;
+  text-align: center;
+  margin: 10px 5px;
+  background: #1abc9c;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 5px;
+  box-shadow: 0px 3px 0px 0px #17a88c;
+  transition: all 150ms ease-in;
+}
+
+.btn-container button:hover {
+  background: #01a383;
+  box-shadow: 0px 3px 0px 0px #008f73;
+}

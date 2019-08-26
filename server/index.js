@@ -1,6 +1,7 @@
 // SERVER DEPENDENCIES
 const express   = require('express'),
     morgan      = require('morgan'),
+    cors        = require('cors'),
     app         = express();
     require('dotenv').config({ path: './.env' });
 
@@ -9,6 +10,7 @@ const profilesRoute = require('./routes/profiles');
 
 // Development environment setup
 const PORT = process.env.PORT || 8000;
+app.use(cors());
 
 // Dev logging: tracks the HTTP requests
 if (process.env.NODE_ENV === 'development')

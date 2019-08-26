@@ -3,32 +3,60 @@ const express   = require ('express'),
     fetch       = require('node-fetch'),
     middleware  = require('../middleware/index');
 
-// api
-router.get('/:summonerName', async (req, res) => {
+// api headers
+const headers = { 'X-Riot-Token': process.env.TRACKER_API_KEY };
+
+// returns an object with summoner data
+router.get('/summoners/:summonerName', async (req, res) => {
     try {
-        const headers = { 'X-Riot-Token': process.env.TRACKER_API_KEY }
-        const { summonerName } = req.params;        
-
+        const { summonerName } = req.params;
+        
         // extract summoner ID
-        let response = await 
-            fetch(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`, 
-            { headers } );
-
-        const summoner = await response.json();
+        let response = await fetch(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`, { headers } );
+        const summonerData = await response.json();
         
-        middleware.checkStatusError(summoner, res);
-
-        // extract summoner's in-game statistics
-        response = await 
-            fetch(`${process.env.STATS_API_URL_BY_ID}/${summoner.id}`,
-            { headers } );
+        // will not continue the api calls if error is present.
+        if (middleware.checkStatusError(summonerData, res)) return;
         
-        const data = await response.json();
-
-        return res.json(data);
+        return res.json(summonerData);
 
     } catch (err) {
-        console.log(`ERROR: ${err.message}`);
+        res.status(500).json({
+            message: 'Server Error'
+        });
+    }
+});
+
+// returns array of champion objects
+router.get('/champions/:summonerID', async (req, res) => {
+    try{
+        const { summonerID } = req.params;
+        let response = await fetch(`${process.env.CHAMPION_API_URL_BY_ID}/${summonerID}`, {headers} );
+        const championData = await response.json();
+
+        if (middleware.checkStatusError(championData, res)) return;
+
+        return res.json(championData);
+
+    } catch(err) {
+        res.status(500).json({
+            message: 'Server Error'
+        });
+    }
+});
+
+// returns an array with up to two objects: 
+// 1. normal ranked
+// 2. tft ranked
+router.get('/ranks/:summonerID', async (req, res) => {
+    try{
+        const { summonerID } = req.params;
+        let response = await fetch(`${process.env.STATS_API_URL_BY_ID}/${summonerID}`, { headers });
+        const rankedData = await response.json();
+        if (middleware.checkStatusError(rankedData, res)) return;
+
+        return res.json(rankedData);
+    } catch(err) {
         res.status(500).json({
             message: 'Server Error'
         });

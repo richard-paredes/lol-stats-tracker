@@ -1,0 +1,90 @@
+h1.summonerName {
+    font-size: 3rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.3rem 0.5rem;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    display: inline-block;
+    margin-top: 2rem;
+    /* border: #fff 2px solid; */
+    padding: 0.5rem 0.8rem;
+}
+
+a:hover {
+    /* border: #ccc 2px solid; */
+    color: #ccc;
+}
+
+.championConatiner, .regRankContainer, .tftRankContainer {
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.rankImage {
+    width: 150px;
+    height: auto;
+    align-self: center;
+}
+
+.profileImage {
+    border-radius: 50%;
+    width: 75px;
+    height: auto;
+}
+
+.championImage {
+    border-radius: 5%;
+    width: 50 px;
+    height: auto;
+
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+
+li {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    margin-bottom: 0.7rem;
+    border-radius: 10px;
+}
+
+li p {
+    font-size: 2rem;
+}
+
+li span {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+@media (max-width: 500px) {
+    h1 {
+        font-size: 1.5rem;
+        display: block;
+        text-align: center;
+    }
+
+    .platform-avatar {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    li p {
+        font-size: 1.5rem;
+    }
+}
