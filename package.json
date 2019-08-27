@@ -4,7 +4,7 @@
   "description": "Track statistics of players in Team Fight Tactics",
   "main": "index.js",
   "scripts": {
-    "start": "npm run client-install && node server",
+    "start": "node server",
     "stop": "killall node",
     "server": "cd ./server && nodemon index.js",
     "client": "npm start --prefix ./client",
