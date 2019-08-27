@@ -8,12 +8,10 @@ const headers = { 'X-Riot-Token': process.env.TRACKER_API_KEY };
 
 // returns an object with summoner data
 router.get('/summoners/:summonerName', async (req, res) => {
-    const { summonerName } = req.params;
-    const baseURL = process.env.SUMMONER_API_URL_BY_NAME + '/';
-    const absoluteURL = baseURL + summonerName;
     try {
+        const { summonerName } = req.params;
         // extract summoner ID
-        let response = await fetch(absoluteURL, { headers } );
+        let response = await fetch(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`, { headers } );
         const summonerData = await response.json();
         // will not continue the api calls if error is present.
         if (middleware.checkStatusError(summonerData, res)) return;
@@ -23,8 +21,7 @@ router.get('/summoners/:summonerName', async (req, res) => {
     } catch (err) {
         res.status(500).json({
             message: 'Server Error while retrieving summoner data',
-            error: err.message,
-            url: absoluteURL
+            error: err.message
         });
     }
 });
@@ -42,7 +39,8 @@ router.get('/champions/:summonerID', async (req, res) => {
 
     } catch(err) {
         res.status(500).json({
-            message: 'Server Error while retrieving champion data'
+            message: 'Server Error while retrieving champion data',
+            error: err.message
         });
     }
 });
@@ -60,7 +58,8 @@ router.get('/ranks/:summonerID', async (req, res) => {
         return res.json(rankedData);
     } catch(err) {
         res.status(500).json({
-            message: 'Server Error while retrieving ranked data'
+            message: 'Server Error while retrieving ranked data',
+            error: err.message
         });
     }
 });

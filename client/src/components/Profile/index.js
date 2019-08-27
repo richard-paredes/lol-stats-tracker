@@ -61,7 +61,7 @@ class Profile extends Component {
             }
             
             // link to CDN for summoner icon
-            const summonerImageURL = `http://ddragon.leagueoflegends.com/cdn/${cdnVersion}/img/profileicon/${summonerData.profileIconId}.png`
+            const summonerImageURL = `https://ddragon.leagueoflegends.com/cdn/${cdnVersion}/img/profileicon/${summonerData.profileIconId}.png`
             
             // local link in project workspace for rank icon
             // un-ranked default values: iron 4;
@@ -71,7 +71,7 @@ class Profile extends Component {
             // link to CDN for champion icon
             const mostUsedChampion = (championData)? championData[0] : null;
             const { refinedChampionName, rawChampionName } = await this.findChampionName(cdnVersion, mostUsedChampion.championId);
-            let championImageURL = (refinedChampionName) ? `http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${refinedChampionName}_0.jpg` : null;
+            let championImageURL = (refinedChampionName) ? `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${refinedChampionName}_0.jpg` : null;
             
             this.setState( {
                 loading: false,
@@ -115,7 +115,7 @@ class Profile extends Component {
         if (!id) return null; // null or undefined id's.
         id = id.toString(); // convert long to string
         try {
-            const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${cdnVersion}/data/en_US/champion.json`);
+            const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${cdnVersion}/data/en_US/champion.json`);
             const championList = response.data.data
             for (let champion in championList) {
                 if (championList[champion].key === id) {
