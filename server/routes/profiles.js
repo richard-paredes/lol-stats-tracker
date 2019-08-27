@@ -14,7 +14,6 @@ router.get('/summoners/:summonerName', async (req, res) => {
         // extract summoner ID
         let response = await fetch(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`, { headers } );
         const summonerData = await response.json();
-        
         // will not continue the api calls if error is present.
         if (middleware.checkStatusError(summonerData, res)) return;
         
@@ -22,7 +21,7 @@ router.get('/summoners/:summonerName', async (req, res) => {
 
     } catch (err) {
         res.status(500).json({
-            message: 'Server Error'
+            message: 'Server Error while retrieving summoner data'
         });
     }
 });
@@ -40,7 +39,7 @@ router.get('/champions/:summonerID', async (req, res) => {
 
     } catch(err) {
         res.status(500).json({
-            message: 'Server Error'
+            message: 'Server Error while retrieving champion data'
         });
     }
 });
@@ -58,7 +57,7 @@ router.get('/ranks/:summonerID', async (req, res) => {
         return res.json(rankedData);
     } catch(err) {
         res.status(500).json({
-            message: 'Server Error'
+            message: 'Server Error while retrieving ranked data'
         });
     }
 });
