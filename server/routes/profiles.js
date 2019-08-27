@@ -10,9 +10,9 @@ const headers = { 'X-Riot-Token': process.env.TRACKER_API_KEY };
 router.get('/summoners/:summonerName', async (req, res) => {
     try {
         const { summonerName } = req.params;
-        
+        const baseURL = process.env.SUMMONER_API_URL_BY_NAME + '/';
         // extract summoner ID
-        let response = await fetch(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`, { headers } );
+        let response = await fetch(baseURL + summonerName, { headers } );
         console.log(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`)
         const summonerData = await response.json();
         // will not continue the api calls if error is present.
