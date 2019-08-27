@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node server",
     "stop": "killall node",
-    "build": "cd ./client && npm run build",
     "server": "cd ./server && nodemon index.js",
     "client": "npm start --prefix ./client",
     "client-install": "cd ./client && npm install",
