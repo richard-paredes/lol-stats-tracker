@@ -18,17 +18,17 @@ if (process.env.NODE_ENV === 'development')
     app.use(morgan('dev'));
 }
 
+app.use('/api/v1/profile', profilesRoute);
+
+// handle production
 if (process.env.NODE_ENV === 'production')
 {
-    app.use(express.static('../client/build'));
+    // set static folder
+    app.use(express.static(__dirname + '../client/build'));
+
+    // handle SPA (single-page-app)
+    app.use(/.*/, (req, res)=> res.sendFile(__dirname + '../client/build/index.html'));
 }
-
-// ROOT
-app.get('/', (req, res) => {
-    res.send('<h1>Hello</h1>')
-});
-
-app.use('/api/v1/profile', profilesRoute);
 
 // initializing server
 app.listen(PORT, () => {

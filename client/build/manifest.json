@@ -1,0 +1,8 @@
+{
+  "short_name": "TFT Stats Tracker",
+  "name": "Team Fight Tactics Summoner Statistics Tracker",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
