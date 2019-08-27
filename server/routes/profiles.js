@@ -13,6 +13,7 @@ router.get('/summoners/:summonerName', async (req, res) => {
         
         // extract summoner ID
         let response = await fetch(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`, { headers } );
+        console.log(`${process.env.SUMMONER_API_URL_BY_NAME}/${summonerName}`)
         const summonerData = await response.json();
         // will not continue the api calls if error is present.
         if (middleware.checkStatusError(summonerData, res)) return;
