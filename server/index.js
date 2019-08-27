@@ -24,10 +24,10 @@ app.use('/api/v1/profile', profilesRoute);
 if (process.env.NODE_ENV === 'production')
 {
     // set static folder
-    app.use(express.static(__dirname + '/client/build'));
+    app.use(express.static(__dirname + '/../client/build'));
 
     // handle SPA (single-page-app)
-    app.use(/.*/, (req, res) => res.sendFile(__dirname + '/client/build/index.html'));
+    app.use(/.*/, (req, res) => res.sendFile(__dirname + '/../client/build/index.html'));
 }
 
 // initializing server
