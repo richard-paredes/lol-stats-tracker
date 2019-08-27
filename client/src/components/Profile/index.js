@@ -35,6 +35,7 @@ class Profile extends Component {
             championName: null,
             cdnVersion: '9.16.1'
         }
+        this.handleClick = this.handleClick.bind(this);
         this.findImageURL = this.findImageURL.bind(this);
         this.findChampionName = this.findChampionName.bind(this);
     }
@@ -94,6 +95,10 @@ class Profile extends Component {
         }
     }
 
+    handleClick(event) {
+        this.setState({ redirectToSearch: true });
+    }
+
     // used to find corresponding image name based on rank + tier
     findImageURL(tier, rank) {
         let result = '';
@@ -140,7 +145,6 @@ class Profile extends Component {
         if (this.state.redirectToSearch) return <Redirect to="/" />
         
         return (
-            
             <div className='mod-container'>
                 <h1 className='summonerName'>
                     <img src={this.state.summonerImageURL} alt="Profile Icon" className="profileImage"/>
@@ -160,9 +164,16 @@ class Profile extends Component {
                     </div>
                     <div className="regRankContainer">
                         <h2>Ranked 5v5:</h2>
+
                         {   (this.state.regRankedImageURL)
                             && <img src={images[this.state.regRankedImageURL]} alt="RANK5v5" className="rankImage"/>
                         }
+                        <h5>
+                        { (this.state.regRankedData)
+                            ? this.state.regRankedData.tier + ' ' + this.state.regRankedData.rank
+                            : 'UNRANKED'
+                        }
+                        </h5>
                         <ul>
                             <li>
                                 <h4>Wins</h4>
@@ -174,12 +185,19 @@ class Profile extends Component {
                             </li>
                         </ul>
                     </div>
+                    <div></div>
                     <div className="tftRankContainer">
                         <h2>Ranked TFT:</h2>
                         {
                             (this.state.tftRankedImageURL)
                             && <img src={images[this.state.tftRankedImageURL]} alt="RANKtft" className="rankImage"/>
                         }
+                        <h5>
+                        { (this.state.tftRankedData)
+                            ? this.state.tftRankedData.tier + ' ' + this.state.tftRankedData.rank
+                            : 'UNRANKED'
+                        }
+                        </h5>
                         <ul>
                             <li>
                                 <h4>Wins</h4>
@@ -191,10 +209,14 @@ class Profile extends Component {
                             </li>
                         </ul>
                     </div>
-                    
-                            
+                </div>
+                <div className="btn-container" style={{height:'50px'}}>
+                    <button onClick={this.handleClick} className="btn" style={{height:'25px'}}>
+                        Go Back
+                    </button>
                 </div>
             </div>
+            
         )
     }
 }

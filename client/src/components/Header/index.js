@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './Header.css';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo-1.png';
 
 export default class Header extends Component {
     constructor(props)
