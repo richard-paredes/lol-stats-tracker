@@ -24,7 +24,8 @@ router.get('/summoners/:summonerName', async (req, res) => {
         res.status(500).json({
             message: 'Server Error while retrieving summoner data',
             error: err.message,
-            url: absoluteURL
+            url: absoluteURL,
+            headers: headers
         });
     }
 });
