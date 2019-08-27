@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "stop": "killall node",
-    "server": "nodemon index.js",
-    "client": "npm start --prefix ../client",
-    "client-install": "cd ../client && npm install",
+    "server": "cd ./server && nodemon index.js",
+    "client": "npm start --prefix ./client",
+    "client-install": "cd ./client && npm install",
     "server-install": "npm install",
     "install-dependencies": "concurrently \"npm run client-install\" \"npm run server-install\" ",
     "dev": "concurrently \"npm run server\" \"npm run client\" "
