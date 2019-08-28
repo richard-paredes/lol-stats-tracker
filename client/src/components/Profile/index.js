@@ -56,8 +56,17 @@ class Profile extends Component {
 
             // check if any ranked statistics available
             if (rank_api_response) {
-                regRankedData = (rank_api_response.data[0]) ? rank_api_response.data[0] : null // object with only regular league of legends ranked data
-                tftRankedData = (rank_api_response.data[1]) ? rank_api_response.data[1] : null // object with tft ranked data
+                
+                regRankedData = (rank_api_response.data[0]) ? rank_api_response.data[0] : null // object with some kind of ranked data
+                tftRankedData = (rank_api_response.data[1]) ? rank_api_response.data[1] : null // object with some kind of ranked data
+                
+                // switch ranked data if needed
+                if (regRankedData) {
+                    regRankedData = (regRankedData.queueType === 'RANKED_SOLO_5x5') ? regRankedData : rank_api_response.data[1];
+                }
+                if (tftRankedData) {
+                    tftRankedData = (tftRankedData.queueType === 'RANKED_TFT') ? tftRankedData : rank_api_response.data[0];
+                }
             }
             
             // link to CDN for summoner icon
